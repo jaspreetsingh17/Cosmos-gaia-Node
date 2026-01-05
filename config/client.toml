@@ -1,0 +1,7 @@
+# Cosmos Client Configuration
+
+chain-id = "cosmoshub-4"
+keyring-backend = "os"
+output = "text"
+node = "tcp://localhost:26657"
+broadcast-mode = "sync"

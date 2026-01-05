@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  gaia:
+    image: ghcr.io/cosmos/gaia:v15.1.0
+    container_name: gaia
+    restart: unless-stopped
+    ports:
+      - "26656:26656"
+      - "26657:26657"
+      - "1317:1317"
+      - "9090:9090"
+      - "9091:9091"
+    volumes:
+      - gaia-data:/root/.gaia
+      - ./config:/config:ro
+    environment:
+      - CHAIN_ID=cosmoshub-4
+    command: >
+      gaiad start
+      --home /root/.gaia
+      --p2p.seeds "bf8328b66dceb4f1a17316f5c6d8d7b3b4a9d427@p2p.cosmos.mainnet.org:26656"
+      --minimum-gas-prices "0.0025uatom"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:26657/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    networks:
+      - cosmos-network
+
+volumes:
+  gaia-data:
+
+networks:
+  cosmos-network:
+    driver: bridge
