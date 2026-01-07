@@ -33,7 +33,7 @@ Cosmos Hub is the first blockchain in the Cosmos ecosystem, serving as the econo
 ## Quick Start
 
 ```bash
-git clone https://github.com/your-username/cosmos-gaia-node.git
+git clone https://github.com/jaspreetsingh17/Cosmos-gaia-Node.git
 cd cosmos-gaia-node
 chmod +x scripts/install.sh
 ./scripts/install.sh
